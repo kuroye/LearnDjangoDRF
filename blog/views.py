@@ -34,6 +34,8 @@ class ArticleDetails(generics.RetrieveUpdateDestroyAPIView):
     Retrieve，update or delete an article instance。"""
 
     queryset = Article.objects.get()
+    serializer_class = ArticleSerializer
+
     # def get_object(self, pk):
     #     try:
     #         return Article.objects.get(pk=pk)

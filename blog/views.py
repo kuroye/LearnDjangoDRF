@@ -1,6 +1,7 @@
 from django.http import Http404
 from rest_framework import status, generics
 from rest_framework.response import Response
+from rest_framework import permissions
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from .models import Article
@@ -11,6 +12,7 @@ class ArticleList(generics.ListCreateAPIView):
 
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -35,6 +37,7 @@ class ArticleDetails(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     # def get_object(self, pk):
     #     try:

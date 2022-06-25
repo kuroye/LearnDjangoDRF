@@ -18,6 +18,7 @@ class Article(models.Model):
     author = models.ForeignKey(User, verbose_name=_('Author'), on_delete=models.CASCADE, related_name='articles')
     status = models.CharField(_('Status (*)'), max_length=1, choices=STATUS_CHOICES, default='s', null=True, blank=True)
     create_date = models.DateTimeField(verbose_name=_('Create Date'), auto_now_add=True)
+    liked_by = models.ManyToManyField(to=User)
 
     def __str__(self):
         return self.title

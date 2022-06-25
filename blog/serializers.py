@@ -5,6 +5,8 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class ArticleSerializer(serializers.ModelSerializer):
+    author = serializers.ReadOnlyField(source='author.username')
+    full_status = serializers.ReadOnlyField(source='get_status_display')
 
     class Meta:
         model = Article

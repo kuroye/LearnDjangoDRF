@@ -22,3 +22,10 @@ class ArticleSerializer(serializers.ModelSerializer):
             return '草稿'
         else:
             return ''
+
+    def to_representation(self, value):
+        data = super().to_representation(value)
+
+        data['total_likes'] = value.liked_by.count()
+
+        return data

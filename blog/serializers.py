@@ -4,7 +4,11 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+class UserSerializer(serializers.ModelSerializer):
 
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email')
 class ArticleSerializer(serializers.ModelSerializer):
     author = serializers.ReadOnlyField(source='author.username')
     full_status = serializers.ReadOnlyField(source='get_status_display')

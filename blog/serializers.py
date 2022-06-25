@@ -6,9 +6,13 @@ User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
 
+    articles = serializers.PrimaryKeyRelatedField(many=True,
+                                                  read_only=True)
+
     class Meta:
         model = User
         fields = ('id', 'username', 'email')
+        read_only_fields = ('id', 'username')
 
 class ArticleSerializer(serializers.ModelSerializer):
     author = UserSerializer(read_only=True)

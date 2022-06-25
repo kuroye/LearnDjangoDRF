@@ -11,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'email')
 
 class ArticleSerializer(serializers.ModelSerializer):
-    author = UserSerializer()
+    author = UserSerializer(read_only=True)
     full_status = serializers.ReadOnlyField(source='get_status_display')
     cn_status = serializers.SerializerMethodField()
 

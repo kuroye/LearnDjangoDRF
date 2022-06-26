@@ -7,9 +7,9 @@ User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
     articles = serializers.StringRelatedField(many=True,
-                                                   read_only=True,
-                                                   # view_name='article-detail',
-                                                   )
+                                              read_only=True,
+                                              # view_name='article-detail',
+                                              )
 
     class Meta:
         model = User

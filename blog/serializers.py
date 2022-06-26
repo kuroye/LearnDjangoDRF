@@ -4,16 +4,18 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-class UserSerializer(serializers.ModelSerializer):
 
-    articles = serializers.PrimaryKeyRelatedField(many=True,
-                                                  read_only=True,
-                                                  )
+class UserSerializer(serializers.ModelSerializer):
+    articles = serializers.StringRelatedField(many=True,
+                                                   read_only=True,
+                                                   # view_name='article-detail',
+                                                   )
 
     class Meta:
         model = User
         fields = ('id', 'username', 'articles',)
         read_only_fields = ('id', 'username',)
+
 
 class ArticleSerializer(serializers.ModelSerializer):
     author = UserSerializer(read_only=True)

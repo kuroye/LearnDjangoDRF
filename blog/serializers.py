@@ -21,6 +21,7 @@ class ArticleSerializer(serializers.ModelSerializer):
     author = UserSerializer(read_only=True)
     full_status = serializers.ReadOnlyField(source='get_status_display')
     cn_status = serializers.SerializerMethodField()
+    # title = serializers.CharField(max_length=100)
 
     class Meta:
         model = Article
@@ -41,3 +42,9 @@ class ArticleSerializer(serializers.ModelSerializer):
         data['total_likes'] = value.liked_by.count()
 
         return data
+
+    # def validate_title(self, value):
+    #
+    #     if 'django' not in value.lower():
+    #         raise serializers.ValidationError("Article is not about Django")
+    #     return value

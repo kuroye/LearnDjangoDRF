@@ -3,17 +3,30 @@ from django.http import Http404
 from rest_framework import status, generics
 from rest_framework.response import Response
 from rest_framework import permissions
+from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.views import APIView
+
 
 from .models import Article
 from .serializers import ArticleSerializer, UserSerializer
 
 User = get_user_model()
 
+class UserInfo(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'users.html'
+
+    def get(self, request):
+        queryset = User.objects.all()
+        return Response({'users': queryset})
+
 class UserList(generics.ListCreateAPIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'users.html'
 
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    # serializer_class = UserSerializer
 
 class UserDetails(generics.RetrieveUpdateDestroyAPIView):
 

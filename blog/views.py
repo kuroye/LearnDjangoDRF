@@ -26,7 +26,7 @@ class UserList(generics.ListCreateAPIView):
     template_name = 'users.html'
 
     queryset = User.objects.all()
-    # serializer_class = UserSerializer
+    serializer_class = UserSerializer
 
 class UserDetails(generics.RetrieveUpdateDestroyAPIView):
 
